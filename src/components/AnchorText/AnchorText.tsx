@@ -1,12 +1,16 @@
 import React from "react";
 
-interface Props {
-    text: string;
+interface AnchorTextProps {
+  text: string;
   anchors: any[];
 }
 
-const AnchorText: React.FC<Props> = ({ text, anchors }) => {
-  return <div>Text</div>;
+const AnchorText: React.FC<AnchorTextProps> = ({ text, anchors }) => {
+  return (
+    <div>
+      {text} {anchors}
+    </div>
+  );
 };
 
 export default AnchorText;

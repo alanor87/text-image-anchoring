@@ -1,29 +1,36 @@
 {
-  "name": "text-image-anchoring",
-  "version": "1.0.0",
-  "description": "Test to image anchoring library.",
+  "name": "@alanor87/text-image-anchoring",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/alanor87"
+  },
+  "version": "0.0.30",
+  "description": "Text to image anchoring library.",
   "scripts": {
-    "rollup": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "author": "alanor87",
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.3",
     "@types/react": "^18.0.14",
-    "react": "^18.2.0",
     "rollup": "^2.75.7",
     "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "files": [
     "dist"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "tslib": "^2.4.0"
-  }
+  "types": "dist/index.d.ts"
 }
