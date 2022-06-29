@@ -1,16 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
+import { AnchorDataContext } from "../AnchorWrapper/AnchorWrapper";
 
 interface AnchorTextProps {
-  text: string;
-  anchors: any[];
+  className?: string;
+  __TYPE?: "AnchorText";
 }
 
-const AnchorText: React.FC<AnchorTextProps> = ({ text, anchors }) => {
+const AnchorText: React.FC<AnchorTextProps> = ({ className }) => {
+  const data: any = useContext(AnchorDataContext);
+  console.log(data);
   return (
     <div>
-      {text} {anchors}
+      {data.anchorText} {data.anchorsArray}
     </div>
   );
+};
+
+AnchorText.defaultProps = {
+  __TYPE: "AnchorText",
 };
 
 export default AnchorText;

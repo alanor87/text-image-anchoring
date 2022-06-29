@@ -1,12 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { AnchorDataContext } from "../AnchorWrapper/AnchorWrapper";
 import './anchorImage.css';
 
 interface AnchorImageProps {
-  imageUrl: string;
-  anchors: any[];
+  className?: string;
+  __TYPE? : 'AnchorImage';
 }
 
-const AnchorImage: React.FC<AnchorImageProps> = ({ imageUrl, anchors }) => {
+const AnchorImage: React.FC<AnchorImageProps> = ({className}) => {
+  const data: any = useContext(AnchorDataContext);
   const newAnchorImgFrameRef = useRef(null);
   const anchorImgFrameRef = useRef(null);
   return (
@@ -24,9 +26,13 @@ const AnchorImage: React.FC<AnchorImageProps> = ({ imageUrl, anchors }) => {
         <span>Click to create anchor.</span>
       </div>
       <div ref={anchorImgFrameRef} className="anchorImgFrame"></div>
-      <img src={imageUrl} />
+      <img src={data.anchorImageUrl} />
     </div>
   );
 };
+
+AnchorImage.defaultProps = {
+  __TYPE: 'AnchorImage'
+}
 
 export default AnchorImage;
