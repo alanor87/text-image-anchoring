@@ -1,0 +1,46 @@
+.tia-anchor_text_container {
+  position: relative;
+  text-align: initial;
+  text-indent: 10px;
+  /* overflow: visible; */
+}
+
+.tia-text_highlight_layer {
+  position: absolute;
+  top: 0;
+  color: transparent;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.tia-text_highlight_layer mark {
+  color: transparent;
+  outline: 1px solid var(--tia-color-border);
+  background-color: transparent;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 250ms linear;
+  pointer-events: all;
+}
+
+.tia-anchoring_mode_button {
+  position: absolute;
+  display: none;
+  width: fit-content;
+  align-items: center;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid var(--tia-color-border);
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: var(--tia-color-background);
+  transition: border-color 250ms linear, background-color 250ms linear;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.tia-anchoring_mode_button:hover {
+  background-color: var(--tia-color-accent);
+  transition: background-color 250ms linear;
+}

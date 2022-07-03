@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/alanor87"
   },
-  "version": "0.0.55",
+  "version": "0.0.108",
   "description": "Text to image anchoring library.",
   "scripts": {
     "build": "rollup -c",
