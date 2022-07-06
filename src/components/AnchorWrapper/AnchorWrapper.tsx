@@ -51,11 +51,10 @@ const AnchorWrapper: React.FC<Props> = ({
   onAnchorsUpdate,
   children,
 }) => {
-  console.log("AnchorWrapper render");
   
   if (highlightColor)
     document.documentElement.style.setProperty(
-      "--tia-color-accent",
+      "--tia-color-1",
       highlightColor
     );
 
@@ -78,6 +77,8 @@ const AnchorWrapper: React.FC<Props> = ({
 
   // Check for duplicates AnchorImage or AnchorText JSX components. Throws Error when finding one.
   useEffect(() => {
+    if(!children) return;
+    
     let AnchorImage: React.FC | null = null;
     let AnchorText: React.FC | null = null;
 

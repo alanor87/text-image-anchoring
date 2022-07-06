@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { AnchorType } from "../../types/types";
 
 type AnchorProps = {
@@ -18,6 +18,7 @@ type DescriptionProps = {
 
 const TextAnchorMark: React.FC<AnchorProps> = ({ anchor, isMarked, onClickHandler }) => {
 
+  // Prevents selecting text that is already in markers.
   const onMouseEnter = (e: React.MouseEvent) => {
     if(e.buttons === 1 && e.altKey) window.getSelection()?.removeAllRanges();
   }
@@ -31,8 +32,8 @@ const TextAnchorMark: React.FC<AnchorProps> = ({ anchor, isMarked, onClickHandle
       style={
         isMarked
           ? {
-              backgroundColor: "var(--tia-color-accent)",
-              color: "black",
+              backgroundColor: "var(--tia-color-1)",
+              color: "var(--tia-text-marker-text-color)",
             }
           : {}
       }

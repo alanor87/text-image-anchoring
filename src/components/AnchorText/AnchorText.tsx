@@ -1,16 +1,25 @@
-import React, { useContext, useRef, useState } from "react";
-import { AnchorTextSelectionData } from "../../types/types";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AnchorDataContext } from "../AnchorWrapper/AnchorWrapper";
 import { DescriptionTextAnchorsLayer } from "./DescriptionTextAnchorsLayer";
 
 import "./anchorText.css";
 
+interface AnchorTextMarkerFrameStyle {
+  textColor?: string;
+  outlineWidth?: string;
+  borderRadius?: string;
+}
+
 interface AnchorTextProps {
   className?: string;
+  textMarkerStyle?: AnchorTextMarkerFrameStyle;
   __TYPE?: "AnchorText";
 }
 
-const AnchorText: React.FC<AnchorTextProps> = ({ className }) => {
+const AnchorText: React.FC<AnchorTextProps> = ({
+  className,
+  textMarkerStyle,
+}) => {
   const {
     isEditable,
     anchorsData,
@@ -28,6 +37,26 @@ const AnchorText: React.FC<AnchorTextProps> = ({ className }) => {
   } = anchorsLogics;
   const [anchorButtonCoords, setAnchorButtonCoords] = useState([0, 0]);
   const descriptionTextRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if(!textMarkerStyle) return;
+    const {textColor, outlineWidth, borderRadius} = textMarkerStyle;
+    if (textColor)
+      document.documentElement.style.setProperty(
+        "--tia-text-marker-text-color",
+        textColor
+      );
+    if (outlineWidth)
+      document.documentElement.style.setProperty(
+        "--tia-text-marker-border-width",
+        outlineWidth
+      );
+    if (borderRadius)
+      document.documentElement.style.setProperty(
+        "--tia-text-marker-border-radius",
+        borderRadius
+      );
+  }, [textMarkerStyle]);
 
   const selectAnchorText = (e: React.MouseEvent<HTMLDivElement>) => {
     const selectedText = window.getSelection()!.toString();
@@ -69,7 +98,7 @@ const AnchorText: React.FC<AnchorTextProps> = ({ className }) => {
   return (
     <div
       ref={descriptionTextRef}
-      className={`tia-anchor_text_container${className ? ` ${className}` : ""}`}
+      className={`tia-anchor_text_container${className ? " " + className : ""}`}
       onMouseUp={selectAnchorText}
       onMouseLeave={
         anchorSelectionImageMode ? () => null : anchorButtonHideHandler

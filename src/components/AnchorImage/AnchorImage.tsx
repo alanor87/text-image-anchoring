@@ -4,12 +4,25 @@ import { pixels2percentage as p2p } from "../utils";
 
 import "./anchorImage.css";
 
+interface AnchorImageFrameStyle {
+  boxShadow?: string;
+  textColor?: string;
+  borderWidth?: string;
+  borderRadius?: string;
+}
+
 interface AnchorImageProps {
   className?: string;
+  imageFrameStyle? :AnchorImageFrameStyle;
   __TYPE?: "AnchorImage";
 }
 
-const AnchorImage: React.FC<AnchorImageProps> = ({ className }) => {
+
+
+const AnchorImage: React.FC<AnchorImageProps> = ({
+  className,
+  imageFrameStyle,
+}) => {
   const {
     anchorsData,
     anchorsLogics,
@@ -17,6 +30,7 @@ const AnchorImage: React.FC<AnchorImageProps> = ({ className }) => {
     anchorSelectionImageMode,
     anchorFrameCreated,
     anchorFrameCoords,
+    isEditable
   } = useContext(AnchorDataContext);
   const {
     setAnchorFrameCreated,
@@ -27,6 +41,31 @@ const AnchorImage: React.FC<AnchorImageProps> = ({ className }) => {
   } = anchorsLogics;
   const newAnchorImgFrameRef = useRef<HTMLDivElement>(null);
   const anchorImgFrameRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if(!imageFrameStyle) return;
+    const {boxShadow, textColor, borderWidth, borderRadius} = imageFrameStyle;
+    if (boxShadow)
+      document.documentElement.style.setProperty(
+        "--tia-image-frame-box-shadow",
+        boxShadow
+      );
+    if (textColor)
+      document.documentElement.style.setProperty(
+        "--tia-image-frame-text-color",
+        textColor
+      );
+    if (borderWidth)
+      document.documentElement.style.setProperty(
+        "--tia-image-frame-border-width",
+        borderWidth
+      );
+    if (borderRadius)
+      document.documentElement.style.setProperty(
+        "--tia-image-frame-border-radius",
+        borderRadius
+      );
+  }, [imageFrameStyle]);
 
   // Coordinates and dimensions for the image anchor frame.
   // Not using useState here to prevent constant rerendering of the component while drawing the div.
@@ -89,7 +128,12 @@ const AnchorImage: React.FC<AnchorImageProps> = ({ className }) => {
             : e.nativeEvent.offsetY;
         newAnchorImgFrameRef.current!.setAttribute(
           "style",
-          `top: ${finalFrameCoordY}px; left: ${finalFrameCoordX}px ; width: ${frameWidth}px; height: ${frameHeight}px; opacity: 1; pointer-events: none;`
+          `top: ${finalFrameCoordY}px;
+           left: ${finalFrameCoordX}px;
+           width: ${frameWidth}px;
+           height: ${frameHeight}px;
+           opacity: 1;
+           pointer-events: none;`
         );
         break;
       }
@@ -115,7 +159,7 @@ const AnchorImage: React.FC<AnchorImageProps> = ({ className }) => {
 
   return (
     <div
-    className={`tia-anchor_image_container${className ? ` ${className}` : ""}`}
+      className={`tia-anchor_image_container${className ? " " + className : ""}`}
       onMouseDown={selectAnchorImgFrame}
       onMouseMove={selectAnchorImgFrame}
       onMouseUp={selectAnchorImgFrame}
@@ -128,7 +172,11 @@ const AnchorImage: React.FC<AnchorImageProps> = ({ className }) => {
         <span>Click to create anchor.</span>
       </div>
       <div ref={anchorImgFrameRef} className="tia-anchor_image_frame">
-        <span className="tia-anchor_image_frame_close" title="Delete anchor" onClick={deleteAnchor}></span>
+        {isEditable && selectedAnchorId && <span
+          className="tia-anchor_image_frame_close"
+          title="Delete anchor"
+          onClick={deleteAnchor}
+        ></span>}
       </div>
       <img src={anchorsData.anchorImageUrl} />
     </div>

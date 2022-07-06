@@ -2,7 +2,6 @@
   position: relative;
   text-align: initial;
   text-indent: 10px;
-  /* overflow: visible; */
 }
 
 .tia-text_highlight_layer {
@@ -15,9 +14,10 @@
 
 .tia-text_highlight_layer mark {
   color: transparent;
-  outline: 1px solid var(--tia-color-border);
+  outline: 1px solid var(--tia-color-2);
+  outline-width: var(--tia-text-marker-border-width);
+  border-radius: var(--tia-text-marker-border-radius);
   background-color: transparent;
-  border-radius: 5px;
   user-select: none;
   cursor: pointer;
   transition: background-color 250ms linear;
@@ -31,7 +31,7 @@
   align-items: center;
   padding: 5px;
   margin: 5px;
-  border: 1px solid var(--tia-color-border);
+  border: 1px solid var(--tia-color-2);
   border-radius: 5px;
   font-size: 16px;
   background-color: var(--tia-color-background);
@@ -41,6 +41,6 @@
 }
 
 .tia-anchoring_mode_button:hover {
-  background-color: var(--tia-color-accent);
+  background-color: var(--tia-color-1);
   transition: background-color 250ms linear;
 }
