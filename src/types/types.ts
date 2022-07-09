@@ -44,3 +44,17 @@ export interface AnchorsContextType {
   selectedAnchorId: string;
   anchorButtonVisible: boolean;
 }
+
+export interface AnchorTextMarkerFrameStyle {
+  textColor?: string;
+  outlineWidth?: string;
+  borderRadius?: string;
+}
+
+export interface AnchorImageFrameStyle {
+  boxShadow?: string;
+  textColor?: string;
+  borderWidth?: string;
+  borderRadius?: string;
+}
+

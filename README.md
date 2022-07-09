@@ -9,8 +9,6 @@ A library, that binds certain parts of the text to certain areas of the image on
 Through npm
 `npm install @alanor87/tial`
 
-Or get compiled development and production version from ./dist
-
 ### Usage
 
 ES6
@@ -29,8 +27,8 @@ The functionality is implemented with usage of three react components :
 ```jsx 
 <AnchorWrapper>{children}</AnchorWrapper> 
 ``` 
-A wrapper, which provides a context for the interaction of highlighting text and corresponding image parts. Accepts children compoenents in arbitrary amounts and order.
-Must not contain more than one AnchorText or AnchorImage - an error will be thrown in such case.
+A wrapper, which provides a context for the interaction of highlighting text and corresponding image parts. Accepts children compoenents in arbitrary amounts and order. You can arrange all the contents of the wrapper block in the desired way and pass the anchored image and text blocks in any order and in any place among onther children componenets - they are going to be bound together through the common AnchorWrapper context.
+AnchorWrapper must not contain more than one AnchorText or AnchorImage - an error will be thrown in such case. Every pair of AnchorTexy/AnchorImage must be wrapped inside their own AnchorWrapper container.
 
 
 | Props         |         Type  |     Required  |      Default  |  Description  |
@@ -102,5 +100,38 @@ Container with the marked (anchored) image.
 | anchorText  | The anchored text block, should be passed a a single solid string. |
 | anchorImageUrl | Url of the anchored image. |
 | anchorsArray | Array of anchors for the coupled text and image components. |
+
+
+#### AnchorTextMarkerFrameStyle
+
+```ts
+  interface AnchorTextMarkerFrameStyle {
+  textColor?: string;
+  outlineWidth?: string;
+  borderRadius?: string;
+}
+```
+| Key         |  Description  |
+| ----------- | ------------- |
+| textColor  | Color of the text in marker - when the marker was selected. Takes any CSS interpretable color value.|
+| outlineWidth | Width of the text marker outline. Takes any CSS interpretable outline-width value.|
+| borderRadius | Border radius for text marker. Takes any CSS interpretable border-radius value.|
+
+#### AnchorImageFrameStyle
+
+```ts
+  interface AnchorImageFrameStyle {
+  boxShadow?: string;
+  textColor?: string;
+  borderWidth?: string;
+  borderRadius?: string;
+}
+```
+| Key         |  Description  |
+| ----------- | ------------- |
+| boxShadow  | Box shadow for the image frame. Takes any CSS interpretable box-shadow value.|
+| textColor | Color of the text inside of the image frame. Takes any CSS interpretable color value.|
+| borderWidth | Width of the image frame border. Takes any CSS interpretable border-width value.|
+| borderRadius | Border radius for text marker. Takes any CSS interpretable border-radius value.|
 
 

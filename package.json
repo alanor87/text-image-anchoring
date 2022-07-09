@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/alanor87/tial.git"
   },
-  "version": "0.0.138",
+  "version": "0.0.140",
   "description": "Text image anchoring library.",
   "keywords" : [
     "text mapping",

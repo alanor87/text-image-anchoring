@@ -1,15 +1,9 @@
 import React, { useRef, useContext, useEffect } from "react";
 import { AnchorDataContext } from "../AnchorWrapper/AnchorWrapper";
 import { pixels2percentage as p2p } from "../utils";
+import { AnchorImageFrameStyle } from "../../types/types";
 
 import "./anchorImage.css";
-
-interface AnchorImageFrameStyle {
-  boxShadow?: string;
-  textColor?: string;
-  borderWidth?: string;
-  borderRadius?: string;
-}
 
 interface AnchorImageProps {
   className?: string;

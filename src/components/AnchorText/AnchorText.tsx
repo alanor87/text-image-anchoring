@@ -1,14 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AnchorDataContext } from "../AnchorWrapper/AnchorWrapper";
 import { DescriptionTextAnchorsLayer } from "./DescriptionTextAnchorsLayer";
+import { AnchorTextMarkerFrameStyle } from "../../types/types";
 
 import "./anchorText.css";
-
-interface AnchorTextMarkerFrameStyle {
-  textColor?: string;
-  outlineWidth?: string;
-  borderRadius?: string;
-}
 
 interface AnchorTextProps {
   className?: string;
