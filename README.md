@@ -33,8 +33,10 @@ a wrapper, which provides a context for the interaction of highlighting text and
 | Props         |         Type  |     Required  |      Default  |  Description   |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | className     |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
-| initialAnchorsData |   object |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  -see the Types section below.|
-| isEditable     |    boolean   |     false     |     false      | If there is an option for creating and deleting anchors. |
+| initialAnchorsData |   object |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below.|
+| isEditable     |    boolean   |     false     |     false     | If there is an option for creating and deleting anchors. |
+| highlightColor |    string    |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
+| onAnchorsUpdate |    function |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
  
 
 #### AnchorText

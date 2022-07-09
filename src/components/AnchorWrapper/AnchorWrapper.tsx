@@ -177,6 +177,7 @@ const AnchorWrapper: React.FC<Props> = ({
 
 AnchorWrapper.defaultProps = {
   isEditable: false,
+  onAnchorsUpdate: ([]) => null
 };
 
 export default AnchorWrapper;
