@@ -11,25 +11,18 @@ Through npm
 
 Or get compiled development and production version from ./dist
 
+### Usage
+
+ES6
+
+```js
+import { AnchorWrapper, AnchorText, AnchorImage } from "@alanor87/tial";
+```
+
 ## Overview
 
- The functionality is implemented with usage of three react components : 
-  
-   - <AnchorWrapper></AnchorWrapper> - a wrapper, which provides a context for the interaction of highlighting text and corresponding image parts.
+The functionality is implemented with usage of three react components :
 
-   Props : 
-
-   ```js
-  className (optional): string;
-  initialAnchorsData: AnchorsDataType;
-  isEditable: boolean;
-  highlightColor?: string;
-  onAnchorsUpdate: (data: AnchorType[]) => void;
-  children: any;}
-
-   ```
-
-
-
+- ```jsx <AnchorWrapper>{children}</AnchorWrapper> ''' - a wrapper, which provides a context for the interaction of highlighting text and corresponding image parts.
 
 
