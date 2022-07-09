@@ -1,10 +1,22 @@
 {
-  "name": "@alanor87/text-image-anchoring",
+  "name": "@alanor87/tial",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/alanor87"
+    "registry": "https://registry.npmjs.org/alanor87"
   },
-  "version": "0.0.125",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanor87/tial.git"
+  },
+  "version": "0.0.130",
   "description": "Text image anchoring library.",
+  "keywords" : [
+    "text mapping",
+    "image mapping",
+    "text image anchoring",
+    "text image binding",
+    "annotations",
+    "text image markers"
+  ],
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build"

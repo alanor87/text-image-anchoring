@@ -47,22 +47,22 @@ const AnchorImage: React.FC<AnchorImageProps> = ({
     const {boxShadow, textColor, borderWidth, borderRadius} = imageFrameStyle;
     if (boxShadow)
       document.documentElement.style.setProperty(
-        "--tia-image-frame-box-shadow",
+        "--tial-image-frame-box-shadow",
         boxShadow
       );
     if (textColor)
       document.documentElement.style.setProperty(
-        "--tia-image-frame-text-color",
+        "--tial-image-frame-text-color",
         textColor
       );
     if (borderWidth)
       document.documentElement.style.setProperty(
-        "--tia-image-frame-border-width",
+        "--tial-image-frame-border-width",
         borderWidth
       );
     if (borderRadius)
       document.documentElement.style.setProperty(
-        "--tia-image-frame-border-radius",
+        "--tial-image-frame-border-radius",
         borderRadius
       );
   }, [imageFrameStyle]);
@@ -159,21 +159,21 @@ const AnchorImage: React.FC<AnchorImageProps> = ({
 
   return (
     <div
-      className={`tia-anchor_image_container${className ? " " + className : ""}`}
+      className={`tial-anchor_image_container${className ? " " + className : ""}`}
       onMouseDown={selectAnchorImgFrame}
       onMouseMove={selectAnchorImgFrame}
       onMouseUp={selectAnchorImgFrame}
     >
       <div
         ref={newAnchorImgFrameRef}
-        className="tia-new_anchor_image_frame"
+        className="tial-new_anchor_image_frame"
         onClick={createAnchor}
       >
         <span>Click to create anchor.</span>
       </div>
-      <div ref={anchorImgFrameRef} className="tia-anchor_image_frame">
+      <div ref={anchorImgFrameRef} className="tial-anchor_image_frame">
         {isEditable && selectedAnchorId && <span
-          className="tia-anchor_image_frame_close"
+          className="tial-anchor_image_frame_close"
           title="Delete anchor"
           onClick={deleteAnchor}
         ></span>}

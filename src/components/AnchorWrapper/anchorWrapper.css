@@ -1,15 +1,15 @@
 :root {
-    --tia-color-1: rgb(240, 117, 35);
-    --tia-color-2:rgb(77, 81, 85);
+    --tial-color-1: rgb(240, 117, 35);
+    --tial-color-2:rgb(77, 81, 85);
 
-    --tia-color-background: rgb(187, 188, 189);
+    --tial-color-background: rgb(187, 188, 189);
 
-    --tia-image-frame-border-width: 2px;
-    --tia-image-frame-border-radius: 5px;
-    --tia-image-frame-box-shadow: inset 0px 0px 9px 8px black;
-    --tia-image-frame-text-color: var(--tia-color-2);
+    --tial-image-frame-border-width: 2px;
+    --tial-image-frame-border-radius: 5px;
+    --tial-image-frame-box-shadow: inset 0px 0px 9px 8px black;
+    --tial-image-frame-text-color: var(--tial-color-2);
 
-    --tia-text-marker-border-width: 2px;
-    --tia-text-marker-border-radius: 5px;
-    --tia-text-marker-text-color: transparent;
+    --tial-text-marker-border-width: 2px;
+    --tial-text-marker-border-radius: 5px;
+    --tial-text-marker-text-color: transparent;
   }

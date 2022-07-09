@@ -54,7 +54,7 @@ const AnchorWrapper: React.FC<Props> = ({
   
   if (highlightColor)
     document.documentElement.style.setProperty(
-      "--tia-color-1",
+      "--tial-color-1",
       highlightColor
     );
 

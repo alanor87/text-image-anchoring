@@ -1,10 +1,10 @@
-.tia-anchor_text_container {
+.tial-anchor_text_container {
   position: relative;
   text-align: initial;
   text-indent: 10px;
 }
 
-.tia-text_highlight_layer {
+.tial-text_highlight_layer {
   position: absolute;
   top: 0;
   color: transparent;
@@ -12,11 +12,11 @@
   pointer-events: none;
 }
 
-.tia-text_highlight_layer mark {
+.tial-text_highlight_layer mark {
   color: transparent;
-  outline: 1px solid var(--tia-color-2);
-  outline-width: var(--tia-text-marker-border-width);
-  border-radius: var(--tia-text-marker-border-radius);
+  outline: 1px solid var(--tial-color-2);
+  outline-width: var(--tial-text-marker-border-width);
+  border-radius: var(--tial-text-marker-border-radius);
   background-color: transparent;
   user-select: none;
   cursor: pointer;
@@ -24,23 +24,23 @@
   pointer-events: all;
 }
 
-.tia-anchoring_mode_button {
+.tial-anchoring_mode_button {
   position: absolute;
   display: none;
   width: fit-content;
   align-items: center;
   padding: 5px;
   margin: 5px;
-  border: 1px solid var(--tia-color-2);
+  border: 1px solid var(--tial-color-2);
   border-radius: 5px;
   font-size: 16px;
-  background-color: var(--tia-color-background);
+  background-color: var(--tial-color-background);
   transition: border-color 250ms linear, background-color 250ms linear;
   cursor: pointer;
   z-index: 1;
 }
 
-.tia-anchoring_mode_button:hover {
-  background-color: var(--tia-color-1);
+.tial-anchoring_mode_button:hover {
+  background-color: var(--tial-color-1);
   transition: background-color 250ms linear;
 }

@@ -32,8 +32,8 @@ const TextAnchorMark: React.FC<AnchorProps> = ({ anchor, isMarked, onClickHandle
       style={
         isMarked
           ? {
-              backgroundColor: "var(--tia-color-1)",
-              color: "var(--tia-text-marker-text-color)",
+              backgroundColor: "var(--tial-color-1)",
+              color: "var(--tial-text-marker-text-color)",
             }
           : {}
       }
@@ -123,5 +123,5 @@ export const DescriptionTextAnchorsLayer: React.FC<DescriptionProps> = ({
     ...choppedDescriptionTextArray.flat(),
   ];
 
-  return <div className="tia-text_highlight_layer">{parsedDescription}</div>;
+  return <div className="tial-text_highlight_layer">{parsedDescription}</div>;
 };

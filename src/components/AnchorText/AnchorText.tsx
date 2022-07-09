@@ -43,17 +43,17 @@ const AnchorText: React.FC<AnchorTextProps> = ({
     const {textColor, outlineWidth, borderRadius} = textMarkerStyle;
     if (textColor)
       document.documentElement.style.setProperty(
-        "--tia-text-marker-text-color",
+        "--tial-text-marker-text-color",
         textColor
       );
     if (outlineWidth)
       document.documentElement.style.setProperty(
-        "--tia-text-marker-border-width",
+        "--tial-text-marker-border-width",
         outlineWidth
       );
     if (borderRadius)
       document.documentElement.style.setProperty(
-        "--tia-text-marker-border-radius",
+        "--tial-text-marker-border-radius",
         borderRadius
       );
   }, [textMarkerStyle]);
@@ -98,7 +98,7 @@ const AnchorText: React.FC<AnchorTextProps> = ({
   return (
     <div
       ref={descriptionTextRef}
-      className={`tia-anchor_text_container${className ? " " + className : ""}`}
+      className={`tial-anchor_text_container${className ? " " + className : ""}`}
       onMouseUp={selectAnchorText}
       onMouseLeave={
         anchorSelectionImageMode ? () => null : anchorButtonHideHandler
@@ -115,7 +115,7 @@ const AnchorText: React.FC<AnchorTextProps> = ({
       />
       <div>
         <button
-          className="tia-anchoring_mode_button"
+          className="tial-anchoring_mode_button"
           style={{
             display: anchorButtonVisible ? "flex" : "none",
             top: anchorButtonCoords[1],
