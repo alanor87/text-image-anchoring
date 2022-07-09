@@ -11,9 +11,8 @@ import "./anchorWrapper.css";
 interface Props {
   className?: string;
   initialAnchorsData: AnchorsDataType;
-  isEditable: boolean;
   highlightColor?: string;
-  onAnchorsUpdate: (data: AnchorType[]) => void;
+  onAnchorsUpdate?: (data: AnchorType[]) => void;
   children: any;
 }
 
@@ -46,7 +45,6 @@ export const AnchorDataContext =
 const AnchorWrapper: React.FC<Props> = ({
   className,
   initialAnchorsData,
-  isEditable,
   highlightColor,
   onAnchorsUpdate,
   children,
@@ -122,6 +120,7 @@ const AnchorWrapper: React.FC<Props> = ({
     setAnchorFrameCreated(false);
   };
   const createAnchor = () => {
+    if(!onAnchorsUpdate) return;
     const { selectedText, selectedTextStartPos } = anchorTextSelectionData;
     const newAnchor: AnchorType = {
       _id: generateAnchorId(selectedText, anchorFrameCoords),
@@ -137,6 +136,7 @@ const AnchorWrapper: React.FC<Props> = ({
   };
 
   const deleteAnchor = () => {
+    if(!onAnchorsUpdate) return;
     const newAnchorsArray = anchorsArray.filter(
       (anchor) => anchor._id !== selectedAnchorId
     );
@@ -160,7 +160,7 @@ const AnchorWrapper: React.FC<Props> = ({
       createAnchor,
       deleteAnchor,
     },
-    isEditable,
+    isEditable : Boolean(onAnchorsUpdate),
     selectedAnchorId,
     anchorFrameCreated,
     anchorFrameCoords,
@@ -173,11 +173,6 @@ const AnchorWrapper: React.FC<Props> = ({
       <div className={className || undefined}>{children}</div>
     </AnchorDataContext.Provider>
   );
-};
-
-AnchorWrapper.defaultProps = {
-  isEditable: false,
-  onAnchorsUpdate: ([]) => null
 };
 
 export default AnchorWrapper;

@@ -17,8 +17,6 @@ interface AnchorImageProps {
   __TYPE?: "AnchorImage";
 }
 
-
-
 const AnchorImage: React.FC<AnchorImageProps> = ({
   className,
   imageFrameStyle,

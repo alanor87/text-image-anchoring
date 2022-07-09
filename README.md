@@ -4,7 +4,7 @@ A library, that binds certain parts of the text to certain areas of the image on
 
 ## Install
 
-[![npm](https://img.shields.io/npm/dm/react-number-format.svg)](https://www.npmjs.com/package/tial)
+[![npm](https://img.shields.io/npm/dm/react-number-format.svg)](https://www.npmjs.com/package/@alanor87/tial)
 
 Through npm
 `npm install @alanor87/tial`
@@ -21,35 +21,83 @@ import { AnchorWrapper, AnchorText, AnchorImage } from "@alanor87/tial";
 
 ## Overview
 
+### Components
+
 The functionality is implemented with usage of three react components :
 
 #### AnchorWrapper
 ```jsx 
 <AnchorWrapper>{children}</AnchorWrapper> 
 ``` 
-a wrapper, which provides a context for the interaction of highlighting text and corresponding image parts.
+A wrapper, which provides a context for the interaction of highlighting text and corresponding image parts. Accepts children compoenents in arbitrary amounts and order.
+Must not contain more than one AnchorText or AnchorImage - an error will be thrown in such case.
 
 
-| Props         |         Type  |     Required  |      Default  |  Description   |
+| Props         |         Type  |     Required  |      Default  |  Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | className     |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
-| initialAnchorsData |   object |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below.|
-| isEditable     |    boolean   |     false     |     false     | If there is an option for creating and deleting anchors. |
+| initialAnchorsData |   object (AnchorsDataType) |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below.|
 | highlightColor |    string    |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
-| onAnchorsUpdate |    function |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
+| onAnchorsUpdate |   function |     false     |     none      | Function that returns updated list of anchors (see Types section). If undefined - option of creating and deleting anchors is not available.|
+
  
 
 #### AnchorText
 ```jsx 
 <AnchorText />
 ``` 
-container with the marked (anchored) text.
+Container with the marked (anchored) text.
+
+
+| Props         |         Type  |     Required  |      Default  |  Description  |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| className     |    string     |     false     |     none      | Additional style through class name for the text container.  |
+| textMarkerStyle |    object   |     false     |     none      | Additional styles for the highlighting text marker. See Types below for the structure.  |
 
 
 #### AnchorImage
 ```jsx 
 <AnchorImage />
 ``` 
-container with the marked (anchored) image.
+Container with the marked (anchored) image.
+
+| Props         |         Type  |     Required  |      Default  |  Description  |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| className     |    string     |     false     |     none      | Additional style through class name for the text container.  |
+| imageFrameStyle |    object   |     false     |     none      | Additional styles for the highlighting image frame. See Types below for the structure.  |
+
+### Types
+
+#### AnchorType
+```ts 
+ interface AnchorType {
+  _id: string;
+  anchorText: string;
+  anchorTextStartPos: number;
+  anchorFrameCoords: number[];
+  anchorFrameSize: number[];
+}
+```
+| Key         |  Description  |
+| ----------- | ------------- |
+| _id         |  Unique id for each anchor. |
+| anchorText  |  The text that should be in the highlighted marker. |
+| anchorTextStartPos  |  The starting position of the highlighted text inside of the anchored text block. |
+| anchorFrameCoords  |  X and Y coordinates of the upper left corner of the highlighing frame on the anchored image. |
+| anchorFrameSize  |  Width and height of the highlighing frame on the anchored image. |
+
+#### AnchorsDataType
+
+```ts
+ interface AnchorsDataType {
+  anchorText: string;
+  anchorImageUrl: string;
+  anchorsArray: AnchorType[];
+}
+```
+| Key         |  Description  |
+| anchorText  | The anchored text block, should be passed a a single solid string. |
+| anchorImageUrl | Url of the anchored image. |
+| anchorsArray | Array of anchors for the coupled text and image components. |
 
 
