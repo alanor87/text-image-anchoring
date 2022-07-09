@@ -23,9 +23,29 @@ import { AnchorWrapper, AnchorText, AnchorImage } from "@alanor87/tial";
 
 The functionality is implemented with usage of three react components :
 
+#### AnchorWrapper
 ```jsx 
 <AnchorWrapper>{children}</AnchorWrapper> 
 ``` 
 a wrapper, which provides a context for the interaction of highlighting text and corresponding image parts.
+
+
+| Props         |         Type  |     Required  |      Default  |  Description   |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| className     |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
+ 
+
+#### AnchorText
+```jsx 
+<AnchorText />
+``` 
+container with the marked (anchored) text.
+
+
+#### AnchorImage
+```jsx 
+<AnchorImage />
+``` 
+container with the marked (anchored) image.
 
 
