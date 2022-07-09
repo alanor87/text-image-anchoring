@@ -38,7 +38,7 @@ Must not contain more than one AnchorText or AnchorImage - an error will be thro
 | className     |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
 | initialAnchorsData |   object (AnchorsDataType) |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below.|
 | highlightColor |    string    |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
-| onAnchorsUpdate |   function |     false     |     none      | Function that returns updated list of anchors (see Types section). If undefined - option of creating and deleting anchors is not available.|
+| onAnchorsUpdate |   function |     false     |     none      | Callback that gets updated list of anchors (see Types section). If undefined - option of creating and deleting anchors is not available.|
 
  
 
@@ -65,6 +65,8 @@ Container with the marked (anchored) image.
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | className     |    string     |     false     |     none      | Additional style through class name for the text container.  |
 | imageFrameStyle |    object   |     false     |     none      | Additional styles for the highlighting image frame. See Types below for the structure.  |
+
+
 
 ### Types
 
@@ -96,6 +98,7 @@ Container with the marked (anchored) image.
 }
 ```
 | Key         |  Description  |
+| ----------- | ------------- |
 | anchorText  | The anchored text block, should be passed a a single solid string. |
 | anchorImageUrl | Url of the anchored image. |
 | anchorsArray | Array of anchors for the coupled text and image components. |
