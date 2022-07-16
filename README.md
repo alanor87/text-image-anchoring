@@ -2,6 +2,11 @@
 
 A library, that binds certain parts of the text to certain areas of the image on the html page, using highlighting text and corresponding selected image area.
 
+
+## Demo page
+
+https://62d2fa763aae82367ce7e346--transcendent-kleicha-02fd00.netlify.app/
+
 ## Install
 
 [![npm](https://img.shields.io/npm/dm/react-number-format.svg)](https://www.npmjs.com/package/@alanor87/tial)

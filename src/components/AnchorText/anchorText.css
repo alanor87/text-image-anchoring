@@ -3,6 +3,7 @@
   text-align: initial;
   text-indent: 10px;
   box-sizing: border-box;
+  white-space: pre-wrap;
 }
 
 .tial-text_highlight_layer {
