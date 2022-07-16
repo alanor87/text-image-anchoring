@@ -83,8 +83,8 @@ Container with the marked (anchored) image.
 | _id         |  Unique id for each anchor. |
 | anchorText  |  The text that should be in the highlighted marker. |
 | anchorTextStartPos  |  The starting position of the highlighted text inside of the anchored text block. |
-| anchorFrameCoords  |  X and Y coordinates of the upper left corner of the highlighing frame on the anchored image. |
-| anchorFrameSize  |  Width and height of the highlighing frame on the anchored image. |
+| anchorFrameCoords  |  X and Y coordinates of the upper left corner of the highlighing frame on the anchored image (percentage from image display size). |
+| anchorFrameSize  |  Width and height of the highlighing frame on the anchored image (percentage from image display size). |
 
 #### AnchorsDataType
 

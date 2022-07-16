@@ -8,12 +8,14 @@ import "./anchorText.css";
 interface AnchorTextProps {
   className?: string;
   textMarkerStyle?: AnchorTextMarkerFrameStyle;
+  title?: string;
   __TYPE?: "AnchorText";
 }
 
 const AnchorText: React.FC<AnchorTextProps> = ({
   className,
   textMarkerStyle,
+  title
 }) => {
   const {
     isEditable,
@@ -34,8 +36,8 @@ const AnchorText: React.FC<AnchorTextProps> = ({
   const descriptionTextRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if(!textMarkerStyle) return;
-    const {textColor, outlineWidth, borderRadius} = textMarkerStyle;
+    if (!textMarkerStyle) return;
+    const { textColor, outlineWidth, borderRadius } = textMarkerStyle;
     if (textColor)
       document.documentElement.style.setProperty(
         "--tial-text-marker-text-color",
@@ -91,35 +93,38 @@ const AnchorText: React.FC<AnchorTextProps> = ({
   const hideAnchorImageFrame = () => setSelectedAnchorId("");
 
   return (
-    <div
-      ref={descriptionTextRef}
-      className={`tial-anchor_text_container${className ? " " + className : ""}`}
-      onMouseUp={selectAnchorText}
-      onMouseLeave={
-        anchorSelectionImageMode ? () => null : anchorButtonHideHandler
-      }
-    >
-      <div>{anchorsData.anchorText}</div>
-      <DescriptionTextAnchorsLayer
-        anchorText={anchorsData.anchorText}
-        anchorsArray={anchorsData.anchorsArray}
-        selectedAnchorId={selectedAnchorId}
-        setSelectedAnchorId={setSelectedAnchorId}
-        showAnchorImageFrame={showAnchorImageFrame}
-        hideAnchorImageFrame={hideAnchorImageFrame}
-      />
-      <div>
-        <button
-          className="tial-anchoring_mode_button"
-          style={{
-            display: anchorButtonVisible ? "flex" : "none",
-            top: anchorButtonCoords[1],
-            left: anchorButtonCoords[0],
-          }}
-          onClick={anchorSelectionImageMode ? onCancelClick : onConfirmClick}
-        >
-          {anchorSelectionImageMode ? "Cancel" : "Create anchor"}
-        </button>
+    <div className={className || ''} title={title}>
+      {" "}
+      <div
+        ref={descriptionTextRef}
+        className={`tial-anchor_text_container`}
+        onMouseUp={selectAnchorText}
+        onMouseLeave={
+          anchorSelectionImageMode ? () => null : anchorButtonHideHandler
+        }
+      >
+        <div>{anchorsData.anchorText}</div>
+        <DescriptionTextAnchorsLayer
+          anchorText={anchorsData.anchorText}
+          anchorsArray={anchorsData.anchorsArray}
+          selectedAnchorId={selectedAnchorId}
+          setSelectedAnchorId={setSelectedAnchorId}
+          showAnchorImageFrame={showAnchorImageFrame}
+          hideAnchorImageFrame={hideAnchorImageFrame}
+        />
+        <div>
+          <button
+            className="tial-anchoring_mode_button"
+            style={{
+              display: anchorButtonVisible ? "flex" : "none",
+              top: anchorButtonCoords[1],
+              left: anchorButtonCoords[0],
+            }}
+            onClick={anchorSelectionImageMode ? onCancelClick : onConfirmClick}
+          >
+            {anchorSelectionImageMode ? "Cancel" : "Create anchor"}
+          </button>
+        </div>
       </div>
     </div>
   );

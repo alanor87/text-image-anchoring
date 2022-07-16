@@ -2,11 +2,13 @@
   position: relative;
   text-align: initial;
   text-indent: 10px;
+  box-sizing: border-box;
 }
 
 .tial-text_highlight_layer {
   position: absolute;
   top: 0;
+  max-width: 100%;
   color: transparent;
   background-color: transparent;
   pointer-events: none;

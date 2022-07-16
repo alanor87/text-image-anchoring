@@ -49,7 +49,6 @@ const AnchorWrapper: React.FC<Props> = ({
   onAnchorsUpdate,
   children,
 }) => {
-  
   if (highlightColor)
     document.documentElement.style.setProperty(
       "--tial-color-1",
@@ -72,36 +71,57 @@ const AnchorWrapper: React.FC<Props> = ({
   const [anchorFrameCreated, setAnchorFrameCreated] = useState(false);
   const [anchorSelectionImageMode, setAnchorSelectionImageMode] =
     useState(false);
+  const [error, setError] = useState("");
 
-  // Check for duplicates AnchorImage or AnchorText JSX components. Throws Error when finding one.
-  useEffect(() => {
-    if(!children) return;
-    
+  // Recursive check for duplicates AnchorImage or AnchorText JSX components.
+  // Deep search is performed - for all folded componenets. Checking Throws Error when finding one.
+  const duplicateCheck = (children: React.ReactNode | React.ReactNode[]) => {
     let AnchorImage: React.FC | null = null;
     let AnchorText: React.FC | null = null;
+    let recursionCount = 0;
 
-    React.Children.toArray(children).forEach((element: any) => {
-      switch (element.props.__TYPE) {
-        case "AnchorText": {
-          if (AnchorText !== null) {
-            throw Error(
-              "There can be only one AnchorText element inside AnchorWrapper."
-            );
+    const recursiveSearch = (children: React.ReactNode | React.ReactNode[]) => {
+      React.Children.toArray(children).forEach((element: any) => {
+        // If element does not have props (therefore, it is not react componenet of any kind) - skipping it.
+        if (!element.props) return;
+
+        switch (element.props.__TYPE) {
+          case "AnchorText": {
+            if (AnchorText !== null) {
+              const errorMsg =
+                "There can be only one AnchorText element inside AnchorWrapper.";
+              setError(errorMsg);
+              throw Error(errorMsg);
+            }
+            AnchorText = element;
+            return;
           }
-          AnchorText = element;
-          break;
-        }
-        case "AnchorImage": {
-          if (AnchorImage !== null) {
-            throw Error(
-              "There can be only one AnchorImage element inside AnchorWrapper."
-            );
+          case "AnchorImage": {
+            if (AnchorImage !== null) {
+              const errorMsg =
+                "There can be only one AnchorImage element inside AnchorWrapper.";
+              setError(errorMsg);
+              throw Error(errorMsg);
+            }
+            AnchorImage = element;
+            return;
           }
-          AnchorImage = element;
-          break;
         }
-      }
-    });
+
+        if (element.props.children) recursiveSearch(element.props.children);
+      });
+      recursionCount += 1;
+    };
+
+    try {
+      recursiveSearch(children);
+    } catch (error: any) {
+      console.error("@alanor87/tial error : ", error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (children) duplicateCheck(children);
   }, [children]);
 
   const anchorButtonConfirmHandler = () => {
@@ -120,7 +140,7 @@ const AnchorWrapper: React.FC<Props> = ({
     setAnchorFrameCreated(false);
   };
   const createAnchor = () => {
-    if(!onAnchorsUpdate) return;
+    if (!onAnchorsUpdate) return;
     const { selectedText, selectedTextStartPos } = anchorTextSelectionData;
     const newAnchor: AnchorType = {
       _id: generateAnchorId(selectedText, anchorFrameCoords),
@@ -136,7 +156,7 @@ const AnchorWrapper: React.FC<Props> = ({
   };
 
   const deleteAnchor = () => {
-    if(!onAnchorsUpdate) return;
+    if (!onAnchorsUpdate) return;
     const newAnchorsArray = anchorsArray.filter(
       (anchor) => anchor._id !== selectedAnchorId
     );
@@ -160,7 +180,7 @@ const AnchorWrapper: React.FC<Props> = ({
       createAnchor,
       deleteAnchor,
     },
-    isEditable : Boolean(onAnchorsUpdate),
+    isEditable: Boolean(onAnchorsUpdate),
     selectedAnchorId,
     anchorFrameCreated,
     anchorFrameCoords,
@@ -170,7 +190,9 @@ const AnchorWrapper: React.FC<Props> = ({
 
   return (
     <AnchorDataContext.Provider value={context}>
-      <div className={className || undefined}>{children}</div>
+      <div className={className || undefined}>
+        {!error ? children : <div className="tial-error-message">{error}</div>}
+      </div>
     </AnchorDataContext.Provider>
   );
 };

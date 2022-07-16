@@ -1,13 +1,13 @@
 import React, { useRef, useContext, useEffect } from "react";
+import { AnchorImageFrameStyle } from "../../types/types";
 import { AnchorDataContext } from "../AnchorWrapper/AnchorWrapper";
 import { pixels2percentage as p2p } from "../utils";
-import { AnchorImageFrameStyle } from "../../types/types";
 
 import "./anchorImage.css";
 
 interface AnchorImageProps {
   className?: string;
-  imageFrameStyle? :AnchorImageFrameStyle;
+  imageFrameStyle?: AnchorImageFrameStyle;
   __TYPE?: "AnchorImage";
 }
 
@@ -22,7 +22,7 @@ const AnchorImage: React.FC<AnchorImageProps> = ({
     anchorSelectionImageMode,
     anchorFrameCreated,
     anchorFrameCoords,
-    isEditable
+    isEditable,
   } = useContext(AnchorDataContext);
   const {
     setAnchorFrameCreated,
@@ -35,8 +35,8 @@ const AnchorImage: React.FC<AnchorImageProps> = ({
   const anchorImgFrameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if(!imageFrameStyle) return;
-    const {boxShadow, textColor, borderWidth, borderRadius} = imageFrameStyle;
+    if (!imageFrameStyle) return;
+    const { boxShadow, textColor, borderWidth, borderRadius } = imageFrameStyle;
     if (boxShadow)
       document.documentElement.style.setProperty(
         "--tial-image-frame-box-shadow",
@@ -150,27 +150,32 @@ const AnchorImage: React.FC<AnchorImageProps> = ({
   };
 
   return (
-    <div
-      className={`tial-anchor_image_container${className ? " " + className : ""}`}
-      onMouseDown={selectAnchorImgFrame}
-      onMouseMove={selectAnchorImgFrame}
-      onMouseUp={selectAnchorImgFrame}
-    >
+    <div className={className || ""}>
+      {" "}
       <div
-        ref={newAnchorImgFrameRef}
-        className="tial-new_anchor_image_frame"
-        onClick={createAnchor}
+        className={`tial-anchor_image_container`}
+        onMouseDown={selectAnchorImgFrame}
+        onMouseMove={selectAnchorImgFrame}
+        onMouseUp={selectAnchorImgFrame}
       >
-        <span>Click to create anchor.</span>
+        <div
+          ref={newAnchorImgFrameRef}
+          className="tial-new_anchor_image_frame"
+          onClick={createAnchor}
+        >
+          <span>{"Click to create \n anchor."}</span>
+        </div>
+        <div ref={anchorImgFrameRef} className="tial-anchor_image_frame">
+          {isEditable && selectedAnchorId && (
+            <span
+              className="tial-anchor_image_frame_close"
+              title="Delete anchor"
+              onClick={deleteAnchor}
+            ></span>
+          )}
+        </div>
+        <img src={anchorsData.anchorImageUrl} />
       </div>
-      <div ref={anchorImgFrameRef} className="tial-anchor_image_frame">
-        {isEditable && selectedAnchorId && <span
-          className="tial-anchor_image_frame_close"
-          title="Delete anchor"
-          onClick={deleteAnchor}
-        ></span>}
-      </div>
-      <img src={anchorsData.anchorImageUrl} />
     </div>
   );
 };
