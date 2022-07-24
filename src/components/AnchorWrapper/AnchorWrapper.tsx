@@ -12,6 +12,7 @@ interface Props {
   className?: string;
   initialAnchorsData: AnchorsDataType;
   highlightColor?: string;
+  initialSelectedAnchorId?: string;
   onAnchorsUpdate?: (data: AnchorType[]) => void;
   children: any;
 }
@@ -46,6 +47,7 @@ const AnchorWrapper: React.FC<Props> = ({
   className,
   initialAnchorsData,
   highlightColor,
+  initialSelectedAnchorId,
   onAnchorsUpdate,
   children,
 }) => {
@@ -60,7 +62,7 @@ const AnchorWrapper: React.FC<Props> = ({
   const [anchorsArray, setAnchorsArray] = useState(
     initialAnchorsData.anchorsArray
   );
-  const [selectedAnchorId, setSelectedAnchorId] = useState("");
+  const [selectedAnchorId, setSelectedAnchorId] = useState(initialSelectedAnchorId || "");
   const [anchorButtonVisible, setAnchorButtonVisible] = useState(false);
   const [anchorTextSelectionData, setAnchorTextSelectionData] = useState({
     selectedText: "",

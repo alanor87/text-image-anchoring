@@ -5,7 +5,7 @@ A library, that binds certain parts of the text to certain areas of the image on
 
 ## Demo page
 
-https://62d2fa763aae82367ce7e346--transcendent-kleicha-02fd00.netlify.app/
+http://tial-lib.com
 
 ## Install
 
@@ -32,16 +32,17 @@ The functionality is implemented with usage of three react components :
 ```jsx 
 <AnchorWrapper>{children}</AnchorWrapper> 
 ``` 
-A wrapper, which provides a context for the interaction of highlighting text and corresponding image parts. Accepts children compoenents in arbitrary amounts and order. You can arrange all the contents of the wrapper block in the desired way and pass the anchored image and text blocks in any order and in any place among onther children componenets - they are going to be bound together through the common AnchorWrapper context.
+A wrapper, which provides a context for the interaction of highlighting text and corresponding image parts. Accepts children compoenents in arbitrary amounts, order and nesting levels. You can arrange all the contents of the wrapper block in the desired way and pass the anchored image and text blocks in any order and in any place among onther children componenets - they are going to be bound together through the common AnchorWrapper context.
 AnchorWrapper must not contain more than one AnchorText or AnchorImage - an error will be thrown in such case. Every pair of AnchorTexy/AnchorImage must be wrapped inside their own AnchorWrapper container.
 
 
-| Props         |         Type  |     Required  |      Default  |  Description  |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| className     |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
-| initialAnchorsData |   object (AnchorsDataType) |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below.|
-| highlightColor |    string    |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
-| onAnchorsUpdate |   function |     false     |     none      | Callback that gets updated list of anchors (see Types section). If undefined - option of creating and deleting anchors is not available.|
+| Props              |         Type  |     Required  |      Default  |  Description  |
+| -------------      | ------------- | ------------- | ------------- | ------------- |
+| className          |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
+| initialAnchorsData |   object (AnchorsDataType) |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below. |
+| highlightColor     |    string    |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
+| initialSelectedAnchorId |    string    |     false     |     none      | Init value of selected anchor id. |
+| onAnchorsUpdate    |   function |     false     |     none      | Callback that gets updated list of anchors (see Types section). If undefined - option of creating and deleting anchors is not available.
 
  
 
