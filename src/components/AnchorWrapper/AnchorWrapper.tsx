@@ -14,6 +14,7 @@ interface Props {
   highlightColor?: string;
   initialSelectedAnchorId?: string;
   onAnchorsUpdate?: (data: AnchorType[]) => void;
+  onAnchorSelect?: (_id: string) => void;
   children: any;
 }
 
@@ -49,20 +50,34 @@ const AnchorWrapper: React.FC<Props> = ({
   highlightColor,
   initialSelectedAnchorId,
   onAnchorsUpdate,
+  onAnchorSelect,
   children,
 }) => {
+
   if (highlightColor)
     document.documentElement.style.setProperty(
       "--tial-color-1",
       highlightColor
     );
 
+     // Check for correctness of passed initial selected ancor id. If it is not passed or
+  // missing among present anchors - return ''.
+  const initialSelectedAnchorIdCheck = () => {
+    if (!initialSelectedAnchorId) return "";
+    const selectedAnchor = initialAnchorsData.anchorsArray.find(
+      (anchor) => anchor._id === initialSelectedAnchorId
+    );
+    return selectedAnchor?._id || "";
+  };
+
   const { anchorText, anchorImageUrl } = initialAnchorsData;
 
   const [anchorsArray, setAnchorsArray] = useState(
     initialAnchorsData.anchorsArray
   );
-  const [selectedAnchorId, setSelectedAnchorId] = useState(initialSelectedAnchorId || "");
+  const [selectedAnchorId, setSelectedAnchorId] = useState(
+    initialSelectedAnchorIdCheck()
+  );
   const [anchorButtonVisible, setAnchorButtonVisible] = useState(false);
   const [anchorTextSelectionData, setAnchorTextSelectionData] = useState({
     selectedText: "",
@@ -74,6 +89,8 @@ const AnchorWrapper: React.FC<Props> = ({
   const [anchorSelectionImageMode, setAnchorSelectionImageMode] =
     useState(false);
   const [error, setError] = useState("");
+
+ 
 
   // Recursive check for duplicates AnchorImage or AnchorText JSX components.
   // Deep search is performed - for all folded componenets. Checking Throws Error when finding one.
@@ -122,6 +139,12 @@ const AnchorWrapper: React.FC<Props> = ({
     }
   };
 
+  // Returning the selected anchorId, if the callback is provided.
+  useEffect(() => {
+    if (onAnchorSelect) onAnchorSelect(selectedAnchorId);
+  }, [selectedAnchorId]);
+
+  // Recursive check for duplicates AnchorImage or AnchorText JSX components is triggered.
   useEffect(() => {
     if (children) duplicateCheck(children);
   }, [children]);
