@@ -41,7 +41,6 @@ AnchorWrapper must not contain more than one AnchorText or AnchorImage - an erro
 | className          |    string     |     false     |     none      | Additional style through class name for the wrapper.  |
 | initialAnchorsData |   object (AnchorsDataType) |     true      |     none      | The object, that includes original text, imageUrl and anchors data. For the structure  - see the Types section below. |
 | highlightColor     |    string    |     false     |     none      | The highlighting color of anchors. Takes any CSS interpretable color value.|
-| initialSelectedAnchorId |    string    |     false     |     none      | Init value of selected anchor id. |
 | onAnchorsUpdate    |   function |     false     |     none      | Callback that gets updated list of anchors (see Types section). If undefined - option of creating and deleting anchors is not available.
 | onAnchorSelect     |   function |     false     |     none      | Callback that gets id of selected anchor when it is being changed.
 

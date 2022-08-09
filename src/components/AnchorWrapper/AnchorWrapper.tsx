@@ -12,7 +12,6 @@ interface Props {
   className?: string;
   initialAnchorsData: AnchorsDataType;
   highlightColor?: string;
-  initialSelectedAnchorId?: string;
   onAnchorsUpdate?: (data: AnchorType[]) => void;
   onAnchorSelect?: (_id: string) => void;
   children: any;
@@ -48,36 +47,24 @@ const AnchorWrapper: React.FC<Props> = ({
   className,
   initialAnchorsData,
   highlightColor,
-  initialSelectedAnchorId,
   onAnchorsUpdate,
   onAnchorSelect,
   children,
 }) => {
-
   if (highlightColor)
     document.documentElement.style.setProperty(
       "--tial-color-1",
       highlightColor
     );
 
-     // Check for correctness of passed initial selected ancor id. If it is not passed or
-  // missing among present anchors - return ''.
-  const initialSelectedAnchorIdCheck = () => {
-    if (!initialSelectedAnchorId) return "";
-    const selectedAnchor = initialAnchorsData.anchorsArray.find(
-      (anchor) => anchor._id === initialSelectedAnchorId
-    );
-    return selectedAnchor?._id || "";
-  };
+  const {
+    anchorText,
+    anchorImageUrl,
+    anchorsArray: initialAnchorsArray,
+  } = initialAnchorsData;
 
-  const { anchorText, anchorImageUrl } = initialAnchorsData;
-
-  const [anchorsArray, setAnchorsArray] = useState(
-    initialAnchorsData.anchorsArray
-  );
-  const [selectedAnchorId, setSelectedAnchorId] = useState(
-    initialSelectedAnchorIdCheck()
-  );
+  const [anchorsArray, setAnchorsArray] = useState(initialAnchorsArray);
+  const [selectedAnchorId, setSelectedAnchorId] = useState("");
   const [anchorButtonVisible, setAnchorButtonVisible] = useState(false);
   const [anchorTextSelectionData, setAnchorTextSelectionData] = useState({
     selectedText: "",
@@ -90,14 +77,11 @@ const AnchorWrapper: React.FC<Props> = ({
     useState(false);
   const [error, setError] = useState("");
 
- 
-
   // Recursive check for duplicates AnchorImage or AnchorText JSX components.
   // Deep search is performed - for all folded componenets. Checking Throws Error when finding one.
   const duplicateCheck = (children: React.ReactNode | React.ReactNode[]) => {
     let AnchorImage: React.FC | null = null;
     let AnchorText: React.FC | null = null;
-    let recursionCount = 0;
 
     const recursiveSearch = (children: React.ReactNode | React.ReactNode[]) => {
       React.Children.toArray(children).forEach((element: any) => {
@@ -129,7 +113,6 @@ const AnchorWrapper: React.FC<Props> = ({
 
         if (element.props.children) recursiveSearch(element.props.children);
       });
-      recursionCount += 1;
     };
 
     try {
@@ -143,6 +126,16 @@ const AnchorWrapper: React.FC<Props> = ({
   useEffect(() => {
     if (onAnchorSelect) onAnchorSelect(selectedAnchorId);
   }, [selectedAnchorId]);
+
+  // The text and image url are passed directly from initialAnchorsData to context, since we are not editing them inside the AnchorWrapper.
+  // The anchorsArray is stored in the local state (being initialized by array from initialAnchorsData, and then lives it's own life
+  // inside of the AnchorWrapper - anchord are being added or deleted. When changing one of the initial data elements - array, text, or url - 
+  // the brand new object needs to be passed in order for the effect to fire and updated the anchorsArray state. The text and url are coming straight
+  // to the context as they are passed.
+  useEffect(() => {
+    setAnchorsArray(initialAnchorsArray);
+    setSelectedAnchorId("");
+  }, [initialAnchorsData]);
 
   // Recursive check for duplicates AnchorImage or AnchorText JSX components is triggered.
   useEffect(() => {
