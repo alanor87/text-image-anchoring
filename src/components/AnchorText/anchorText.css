@@ -4,6 +4,10 @@
   text-indent: 10px;
   box-sizing: border-box;
   white-space: pre-wrap;
+  /* 
+    Prevents imposed font resizing in highlight layer on mobile browsers. See notes below.
+   */
+  max-height: 100%; 
 }
 
 .tial-text_highlight_layer {
@@ -47,3 +51,14 @@
   background-color: var(--tial-color-1);
   transition: background-color 250ms linear;
 }
+
+
+/* 
+   Notes 
+
+ - 1 - Android Chrome only applies font boosting to elements with dynamic height. 
+     As soon as you specify a height or max-height, font boosting is not applied.
+     Setting max-height is simple and should have no side effects.
+     https://stackoverflow.com/questions/11289166/chrome-on-android-resizes-font
+
+   */
