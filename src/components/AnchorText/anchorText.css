@@ -20,7 +20,7 @@
 
 .tial-text_highlight_layer mark {
   color: transparent;
-  outline: 1px solid var(--tial-color-2);
+  outline: 1px solid var(--tial-color-1);
   outline-width: var(--tial-text-marker-border-width);
   border-radius: var(--tial-text-marker-border-radius);
   background-color: transparent;
