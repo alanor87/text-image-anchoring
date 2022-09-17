@@ -14,6 +14,7 @@ interface Props {
   highlightColor?: string;
   onAnchorsUpdate?: (data: AnchorType[]) => void;
   onAnchorSelect?: (_id: string) => void;
+  __TYPE?: string;
   children: any;
 }
 
@@ -89,6 +90,12 @@ const AnchorWrapper: React.FC<Props> = ({
         if (!element.props) return;
 
         switch (element.props.__TYPE) {
+          case "AnchorWrapper" : {
+            const errorMsg =
+                "AnchorWrapper shoud not be passed as child to another AnchorWrapper component..";
+              setError(errorMsg);
+              throw Error(errorMsg);
+          }
           case "AnchorText": {
             if (AnchorText !== null) {
               const errorMsg =
@@ -209,10 +216,14 @@ const AnchorWrapper: React.FC<Props> = ({
   return (
     <AnchorDataContext.Provider value={context}>
       <div className={className || undefined}>
-        {!error ? children : <div className="tial-error-message">{error}</div>}
+        {!error ? children : <div className="tial-error-message">{'Tial-lib error : ' + error}</div>}
       </div>
     </AnchorDataContext.Provider>
   );
 };
+
+AnchorWrapper.defaultProps = {
+  __TYPE: "AnchorWrapper",
+}
 
 export default AnchorWrapper;
