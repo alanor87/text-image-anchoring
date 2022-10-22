@@ -1,5 +1,6 @@
 # TIAL (v0.1.13) - text image anchoring library for React.
 
+
 A library, that binds certain parts of the text to certain areas of the image on the html page, using highlighting text and corresponding selected image area.
 
 
