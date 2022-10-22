@@ -3,6 +3,7 @@
 
 A library, that binds certain parts of the text to certain areas of the image on the html page, using highlighting text and corresponding selected image area.
 
+
 ## Demo page
 
 http://tial-lib.com
