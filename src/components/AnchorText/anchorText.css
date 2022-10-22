@@ -55,7 +55,7 @@
 /* 
    Notes 
 
- - 1 - Android Chrome only applies font boosting to elements with dynamic height. 
+ 1 - Android Chrome only applies font boosting to elements with dynamic height. 
      As soon as you specify a height or max-height, font boosting is not applied.
      Setting max-height is simple and should have no side effects.
      https://stackoverflow.com/questions/11289166/chrome-on-android-resizes-font
