@@ -1,3 +1,5 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N6116MII)
+
 # TIAL (v0.1.13) - text image anchoring library for React.
 
 
